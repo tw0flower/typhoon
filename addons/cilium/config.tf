@@ -37,7 +37,7 @@ resource "kubernetes_config_map" "cilium" {
 
     # Enable IPv6 addressing. If enabled, all endpoints are allocated an IPv6
     # address.
-    enable-ipv6 = "false"
+    enable-ipv6 = "true"
 
     # Enable probing for a more efficient clock source for the BPF datapath
     enable-bpf-clock-probe = "true"
@@ -152,6 +152,8 @@ resource "kubernetes_config_map" "cilium" {
     disable-cnp-status-updates  = "true"
     cluster-pool-ipv4-cidr      = "${var.pod_cidr}"
     cluster-pool-ipv4-mask-size = "24"
+    cluster-pool-ipv6-cidr      = "${var.pod_cidr_ipv6}"
+    cluster-pool-ipv6-mask-size = "24"
 
     # Health
     agent-health-port               = "9876"

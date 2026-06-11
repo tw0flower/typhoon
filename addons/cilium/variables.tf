@@ -4,6 +4,12 @@ variable "pod_cidr" {
   default     = "10.20.0.0/14"
 }
 
+variable "pod_cidr_ipv6" {
+  type        = string
+  description = "CIDR IP range to assign Kubernetes pods"
+  default     = "2001:db8:20::/56"
+}
+
 variable "daemonset_tolerations" {
   type        = list(string)
   description = "List of additional taint keys kube-system DaemonSets should tolerate (e.g. ['custom-role', 'gpu-role'])"
