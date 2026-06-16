@@ -55,7 +55,7 @@ resource "matchbox_profile" "controllers" {
 data "ct_config" "controllers" {
   count = length(var.controllers)
   content = templatefile("${path.module}/butane/controller.yaml", {
-    mac_address            = var.mac_address
+    mac_address            = var.controllers.*.mac_address[count.index]
     domain_name            = var.controllers.*.domain[count.index]
     etcd_name              = var.controllers.*.name[count.index]
     etcd_initial_cluster   = join(",", formatlist("%s=https://%s:2380", var.controllers.*.name, var.controllers.*.domain))
