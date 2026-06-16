@@ -272,12 +272,13 @@ storage:
           runtime_type = "io.containerd.runc.v2"
           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
           SystemdCgroup = true
-    - path: /usr/lib/NetworkManager/conf.d/ip6-privacy.conf
+    - path: /etc/NetworkManager/conf.d/ip6-privacy.conf
       overwrite: true
       contents:
           inline: |
             [connection]
             ipv6.ip6-privacy=0
+            addr-gen-mode=eui64
 passwd:
   users:
     - name: core
