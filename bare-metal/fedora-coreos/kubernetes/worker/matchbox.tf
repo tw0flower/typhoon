@@ -50,6 +50,7 @@ resource "matchbox_profile" "worker" {
 # Fedora CoreOS workers
 data "ct_config" "worker" {
   content = templatefile("${path.module}/butane/worker.yaml", {
+    mac_address            = var.mac_address
     domain_name            = var.domain
     ssh_authorized_key     = var.ssh_authorized_key
     cluster_dns_service_ip = cidrhost(var.service_cidr, 10)

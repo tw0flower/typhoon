@@ -170,12 +170,32 @@ storage:
           runtime_type = "io.containerd.runc.v2"
           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
           SystemdCgroup = true
-    - path: /usr/lib/NetworkManager/conf.d/ip6-privacy.conf
+    - path: /etc/NetworkManager/system-connections/bootstrap.nmconnection
       overwrite: true
       contents:
           inline: |
             [connection]
+            id=Bootstrap Connection
+            type=ethernet
+
+            [ethernet]
+            mac-address=${mac_address}
+
+            [ipv4]
+            method=auto
+
+            [ipv6]
             ipv6.ip6-privacy=0
+            addr-gen-mode=eui64
+            method=auto
+    - path: /etc/NetworkManager/conf.d/noauto.conf
+      mode: 0644
+      contents:
+        inline: |
+          [main]
+          # Do not do automatic (DHCP/SLAAC) configuration on ethernet devices
+          # with no other matching connections.
+          no-auto-default=*
 passwd:
   users:
     - name: core
