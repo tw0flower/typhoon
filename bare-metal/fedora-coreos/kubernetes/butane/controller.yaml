@@ -277,8 +277,9 @@ storage:
       contents:
           inline: |
             [connection]
-            id=Bootstrap Connection
+            id=Bootstrap
             type=ethernet
+            autoconnect=true
 
             [ethernet]
             mac-address=${mac_address}

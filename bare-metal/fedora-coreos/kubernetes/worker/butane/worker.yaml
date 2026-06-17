@@ -177,6 +177,7 @@ storage:
             [connection]
             id=Bootstrap Connection
             type=ethernet
+            autoconnect=true
 
             [ethernet]
             mac-address=${mac_address}
