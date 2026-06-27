@@ -172,13 +172,14 @@ storage:
           SystemdCgroup = true
     - path: /etc/NetworkManager/system-connections/bootstrap.nmconnection
       overwrite: true
+      mode: 0600
       contents:
           inline: |
             [connection]
-            id=Bootstrap Connection
-            uuid=4b446e23-fb3e-4a7b-9f67-63c62f4b1dfb
+            id=Bootstrap
+            uuid=e9cdea76-a32d-4ea1-84b3-ed839f20c4db
             type=ethernet
-            autoconnect=true
+            interface-name=enp2s0
 
             [ethernet]
             mac-address=${mac_address}
@@ -187,16 +188,18 @@ storage:
             method=auto
 
             [ipv6]
-            ipv6.ip6-privacy=0
             addr-gen-mode=eui64
             method=auto
-    - path: /etc/NetworkManager/conf.d/noauto.conf
-      mode: 0644
+
+            [proxy]
+    - path: /etc/NetworkManager/conf.d/ipv6.conf
+      mode: 0600
       contents:
         inline: |
           [main]
           # Do not do automatic (DHCP/SLAAC) configuration on ethernet devices
           # with no other matching connections.
+          plugins=keyfile
           no-auto-default=*
 passwd:
   users:
