@@ -278,6 +278,7 @@ storage:
           inline: |
             [connection]
             id=Bootstrap
+            uuid=c2bda07a-1961-4c77-ba6c-a6c8457fffcb
             type=ethernet
             autoconnect=true
 
