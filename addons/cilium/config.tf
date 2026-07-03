@@ -39,6 +39,9 @@ resource "kubernetes_config_map" "cilium" {
     # address.
     enable-ipv6 = "true"
 
+    # Enable GatewayApi
+    enable-gateway-api: "true"
+
     # Enable probing for a more efficient clock source for the BPF datapath
     enable-bpf-clock-probe = "true"
 
