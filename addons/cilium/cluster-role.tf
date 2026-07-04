@@ -66,6 +66,55 @@ resource "kubernetes_cluster_role" "operator" {
     api_groups = ["coordination.k8s.io"]
     resources  = ["leases"]
   }
+
+  # GatewayAPI
+  rule {
+    verbs      = ["create", "update", "delete", "patch"]
+    api_groups = [""]
+    resources  = ["services"]
+  }
+
+  rule {
+    verbs      = ["create", "update", "delete", "patch"]
+    api_groups = ["discovery.k8s.io"]
+    resources  = ["endpointslices"]
+  }
+
+  rule {
+    verbs      = ["get", "list", "watch", "create", "update", "delete", "patch"]
+    api_groups = ["discovery.k8s.io"]
+    resources  = ["endpointslices"]
+  }
+
+  rule {
+    verbs      = ["get", "list", "watch"]
+    api_groups = ["gateway.networking.k8s.io"]
+    resources  = ["gatewayclasses", "gateways", "tcproutes", "udproutes", "tlsroutes", "httproutes", "grpcroutes", "referencegrants", "referencepolicies", "backendtlspolicies", "listenersets"]
+  }
+
+  rule {
+    verbs      = ["patch"]
+    api_groups = ["gateway.networking.k8s.io"]
+    resources  = ["gatewayclasses"]
+  }
+
+  rule {
+    verbs      = ["update", "patch"]
+    api_groups = ["gateway.networking.k8s.io"]
+    resources  = ["gatewayclasses/status", "gateways/status", "httproutes/status", "grpcroutes/status", "tlsroutes/status", "backendtlspolicies/status", "tcproutes/status", "udproutes/status", "listenersets/status"]
+  }
+
+  rule {
+    verbs      = ["update", "patch"]
+    api_groups = ["cilium.io"]
+    resources  = ["ciliumgatewayclassconfigs/status"]
+  }
+
+  rule {
+    verbs      = ["get", "list", "watch"]
+    api_groups = [""]
+    resources  = ["configmaps"]
+  }
 }
 
 resource "kubernetes_cluster_role" "agent" {
